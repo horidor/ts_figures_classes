@@ -8,7 +8,7 @@ const ROUND_VALUE: number = 100;
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea: Function;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
@@ -32,7 +32,7 @@ export class Triangle implements Figure {
 
     if (ascSides[2] >= ascSides[1] + ascSides[0]) {
       throw new Error(
-        `Traingle cannot be formed with sides of length ${a}, ${b} and ${c}`,
+        `Triangle cannot be formed with sides of length ${a}, ${b} and ${c}`,
       );
     }
   }
@@ -71,10 +71,10 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
+    public width: number,
+    public height: number,
   ) {
-    if (a <= 0 || b <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error(
         'Shape cannot be formed with zero or negative length sides',
       );
@@ -82,7 +82,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const result = this.a * this.b;
+    const result = this.width * this.height;
 
     return Math.trunc(result * ROUND_VALUE) / ROUND_VALUE;
   }
